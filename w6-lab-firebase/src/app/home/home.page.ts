@@ -57,7 +57,7 @@ import { TasksService, Task } from '../services/tasks.service';
 export class HomePage {
   private authService = inject(AuthService);
   private tasksService = inject(TasksService);
-  private routerService = inject(Router);
+  private router = inject(Router);
   private alertController = inject(AlertController);
 
   // Get the user's tasks from the tasks service
@@ -137,6 +137,7 @@ export class HomePage {
 
   async signOut() {
     await this.authService.signOutUser();
-    await this.routerService.navigateByUrl('/', { replaceUrl: true });
+    console.log('User signed out');
+    await this.router.navigateByUrl('/login', { replaceUrl: true });
   }
 }

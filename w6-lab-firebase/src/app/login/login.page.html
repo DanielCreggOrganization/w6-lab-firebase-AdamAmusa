@@ -21,17 +21,6 @@
             [class.ion-invalid]="userAuthForm.get('email')?.invalid && userAuthForm.get('email')?.touched"
             [class.ion-valid]="userAuthForm.get('email')?.valid"
           ></ion-input>
-          
-          <!-- Email Error Messages -->
-          <div class="error-message" 
-               *ngIf="userAuthForm.get('email')?.invalid && userAuthForm.get('email')?.touched">
-            <div *ngIf="userAuthForm.get('email')?.errors?.['required']">
-              Email is required
-            </div>
-            <div *ngIf="userAuthForm.get('email')?.errors?.['email']">
-              Please enter a valid email address
-            </div>
-          </div>
 
           <ion-input 
             class="ion-margin-bottom"
@@ -46,16 +35,6 @@
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
           
-          <!-- Password Error Messages -->
-          <div class="error-message" 
-               *ngIf="userAuthForm.get('password')?.invalid && userAuthForm.get('password')?.touched">
-            <div *ngIf="userAuthForm.get('password')?.errors?.['required']">
-              Password is required
-            </div>
-            <div *ngIf="userAuthForm.get('password')?.errors?.['minlength']">
-              Password must be at least 6 characters
-            </div>
-          </div>
 
           <div class="ion-text-center">
             <ion-button 
@@ -73,6 +52,14 @@
               (click)="handleRegistration()"
             >
               Create Account
+            </ion-button>
+            <ion-button 
+              class="ion-margin" 
+              expand="block"
+              [disabled]="!userAuthForm.get('email')?.valid"
+              (click)="handlePasswordReset()"
+            >
+              Reset Password
             </ion-button>
           </div>
         </form>

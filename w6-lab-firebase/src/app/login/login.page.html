@@ -18,7 +18,20 @@
             helperText="Enter a valid email"
             errorText="Invalid email"
             formControlName="email"
+            [class.ion-invalid]="userAuthForm.get('email')?.invalid && userAuthForm.get('email')?.touched"
+            [class.ion-valid]="userAuthForm.get('email')?.valid"
           ></ion-input>
+          
+          <!-- Email Error Messages -->
+          <div class="error-message" 
+               *ngIf="userAuthForm.get('email')?.invalid && userAuthForm.get('email')?.touched">
+            <div *ngIf="userAuthForm.get('email')?.errors?.['required']">
+              Email is required
+            </div>
+            <div *ngIf="userAuthForm.get('email')?.errors?.['email']">
+              Please enter a valid email address
+            </div>
+          </div>
 
           <ion-input 
             class="ion-margin-bottom"
@@ -27,13 +40,40 @@
             fill="solid" 
             labelPlacement="floating"
             formControlName="password"
+            [class.ion-invalid]="userAuthForm.get('password')?.invalid && userAuthForm.get('password')?.touched"
+            [class.ion-valid]="userAuthForm.get('password')?.valid"
           >
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
+          
+          <!-- Password Error Messages -->
+          <div class="error-message" 
+               *ngIf="userAuthForm.get('password')?.invalid && userAuthForm.get('password')?.touched">
+            <div *ngIf="userAuthForm.get('password')?.errors?.['required']">
+              Password is required
+            </div>
+            <div *ngIf="userAuthForm.get('password')?.errors?.['minlength']">
+              Password must be at least 6 characters
+            </div>
+          </div>
 
           <div class="ion-text-center">
-            <ion-button class="ion-margin" expand="block">Login</ion-button>
-            <ion-button class="ion-margin" expand="block" (click)="handleRegistration()">Create Account</ion-button>
+            <ion-button 
+              class="ion-margin" 
+              expand="block"
+              [disabled]="!userAuthForm.valid"
+              (click)="handleAuthentication()"
+            >
+              Login
+            </ion-button>
+            <ion-button 
+              class="ion-margin" 
+              expand="block"
+              [disabled]="!userAuthForm.valid"
+              (click)="handleRegistration()"
+            >
+              Create Account
+            </ion-button>
           </div>
         </form>
       </ion-col>

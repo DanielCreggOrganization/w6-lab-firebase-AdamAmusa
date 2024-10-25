@@ -102,6 +102,7 @@ export class HomePage {
   async toggleTask(event: Event, task: Task) {
     task.completed = (event as CustomEvent).detail.checked;
     await this.tasksService.toggleTaskCompleted(task);
+    console.log(task.completed);
   }
 
   async editTask(task: Task, slidingItem: IonItemSliding) {

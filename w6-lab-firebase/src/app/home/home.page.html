@@ -24,9 +24,11 @@
     @for (task of userTasks$ | async; track task.id) {
     <ion-item-sliding #slidingItem>
       <ion-item>
-        <ion-label [color]="task.completed ? 'medium' : ''">
+        <ion-checkbox alignment="start" (ionChange)="toggleTask($event, task)">
+          <ion-label [color]="task.completed ? 'medium' : ''">
           {{task.content}}
         </ion-label>
+        </ion-checkbox>    
       </ion-item>
 
       <ion-item-options>
